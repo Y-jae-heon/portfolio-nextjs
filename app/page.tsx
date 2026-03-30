@@ -196,9 +196,14 @@ export default function Home() {
               <h1 className="mt-5 max-w-4xl text-balance text-xl font-semibold leading-[1.08] text-ink sm:text-2xl lg:text-4xl whitespace-pre-wrap">
                 {content.headline}
               </h1>
-              <p className="mt-6 max-w-2xl text-pretty text-lg leading-8 text-muted sm:leading-9">
-                {content.intro}
-              </p>
+              {content.intro.split("\n\n").map((paragraph, i) => (
+                <p
+                  key={i}
+                  className={`${i === 0 ? "mt-6" : "mt-4"} max-w-2xl text-pretty text-lg leading-8 text-muted sm:leading-9`}
+                >
+                  {paragraph}
+                </p>
+              ))}
               <div className="mt-8 flex flex-wrap gap-3">
                 {content.chips.map((chip) => (
                   <Badge key={chip}>{chip}</Badge>
