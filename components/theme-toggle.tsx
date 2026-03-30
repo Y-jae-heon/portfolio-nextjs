@@ -27,21 +27,31 @@ function getInitialTheme(): Theme {
 }
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof document === "undefined") {
-      return "light";
-    }
-
-    return getInitialTheme();
-  });
+  const [theme, setTheme] = useState<Theme>("light");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setTheme(getInitialTheme());
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
     localStorage.setItem(STORAGE_KEY, theme);
-  }, [theme]);
+  }, [theme, mounted]);
 
   const nextTheme: Theme = theme === "light" ? "dark" : "light";
+
+  if (!mounted) {
+    return (
+      <div className="inline-flex min-h-11 items-center gap-1 rounded-full border border-subtle bg-surface p-1 opacity-0">
+        <span className="rounded-full px-3 py-2 text-[12px]">라이트</span>
+        <span className="rounded-full px-3 py-2 text-[12px]">다크</span>
+      </div>
+    );
+  }
 
   return (
     <button

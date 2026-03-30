@@ -99,7 +99,7 @@ export type PortfolioContent = {
 export const content: PortfolioContent = {
   name: "Jaeheon Yeom",
   role: "프로덕트 엔지니어",
-  location: "안양",
+  location: "Frontend Engineer · 경력 5년+",
   headline:
     "주어진 도구로 안 되면 직접 만들고,\n팀에 비어 있는 역할이 있으면\n채워왔습니다.",
   intro:
