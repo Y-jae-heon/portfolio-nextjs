@@ -99,6 +99,17 @@ model: claude-sonnet-4-6
 
 ---
 
+## 산출물 저장
+
+JSON 출력을 완료한 후 반드시 `./ai-work/analysis/` 에 파일로 저장한다.
+
+- **파일명**: `YYYY-MM-DD-requirements.json` (예: `2026-03-30-requirements.json`)
+- **내용**: 출력한 JSON 그대로 저장
+- 디렉토리가 없으면 생성한다.
+- 같은 날짜 파일이 이미 있으면 `-v2`, `-v3` 접미사를 붙인다.
+
+---
+
 ## 처리 절차
 
 1. 입력(메시지 또는 파일)에서 요구사항 후보를 모두 나열한다.
@@ -109,3 +120,4 @@ model: claude-sonnet-4-6
 6. resume_alignment 필드에 이력서 대응 항목을 명시한다.
 7. 모호한 요구사항은 needs_clarification: true + clarification_question 작성.
 8. JSON 형식으로 출력한다.
+9. JSON을 `./ai-work/analysis/`에 파일로 저장한다.

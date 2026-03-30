@@ -1,0 +1,199 @@
+{
+  "summary": "이력서 기준으로 featured projects 3개 교체(마인드아너스/SMTOWN/리뷰핀치), Hero 헤드라인·intro·heroMetrics 업데이트, capabilities에 멀티플랫폼 연동 그룹 추가, Skills·Timeline subProjects·Education·Certifications 섹션 신규 추가",
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "description": "content.projects 배열을 이력서 기준 3개 프로젝트(마인드아너스, SMTOWN, 리뷰핀치)로 교체. 현재 Boostree, DoctorInHome, SMTown(내용 상이) 3개를 완전히 교체한다. 각 프로젝트는 slug/eyebrow/name/summary/problem/role/approach/impact/stack/tradeoff 필드를 이력서 문장 기준으로 작성.",
+      "section": "Projects",
+      "related_sections": [],
+      "priority": "P0",
+      "target_file": "app/content.ts",
+      "acceptance_criteria": [
+        "projects 배열 길이가 3이고, slug가 각각 mindaonors, smtown, reviewpinch임",
+        "마인드아너스: requestAnimationFrame 기반 Timer Hook, PM 리딩, Sendbird Call 스택 포함",
+        "SMTOWN: Android Native 모듈 직접 개발, AR·NFC·BLE 연동, eyebrow에 '멀티플랫폼' 포함",
+        "리뷰핀치: OpenAI + TensorFlow, 80% 단축, B2C 웹 + 백오피스 언급 포함",
+        "각 프로젝트에 tradeoff 필드가 비어 있지 않음",
+        "Boostree, DoctorInHome 항목이 projects 배열에서 제거됨"
+      ],
+      "dependencies": [],
+      "resume_alignment": "이력서 슬로그업 섹션: 마인드아너스(2025.03–2025.07), SMTOWN(2025.01–진행 중), 리뷰핀치(2024.10–2025.03)",
+      "needs_clarification": false,
+      "clarification_question": ""
+    },
+    {
+      "id": "REQ-002",
+      "description": "content.headline을 이력서 첫 줄 문장으로 교체. content.intro를 이력서 소개 문단(React·React Native 기반 B2B·B2C 서비스 5년 넘게 리딩, 서드파티 한계 → Android Native 모듈 직접 개발, 타이머 오차 → 브라우저 렌더링 사이클)으로 업데이트.",
+      "section": "Hero",
+      "related_sections": [],
+      "priority": "P0",
+      "target_file": "app/content.ts",
+      "acceptance_criteria": [
+        "headline이 '주어진 도구로 안 되면 직접 만들고,\\n팀에 비어 있는 역할이 있으면\\n채워왔습니다.'로 변경됨",
+        "intro에 'React·React Native', '5년', 'Android Native 모듈', '브라우저 렌더링 사이클' 키워드가 포함됨",
+        "intro가 한 문장 이상의 구체적 기술 경험 서사로 구성됨"
+      ],
+      "dependencies": [],
+      "resume_alignment": "이력서 헤드라인: '주어진 도구로 안 되면 직접 만들고, 팀에 비어 있는 역할이 있으면 채워왔습니다.' / 소개 첫 단락",
+      "needs_clarification": false,
+      "clarification_question": ""
+    },
+    {
+      "id": "REQ-003",
+      "description": "heroMetrics 3개를 이력서 정량 성과 기준으로 교체. 현재 '0→1 / Multi / Lead' 조합을 '80% AI 파이프라인 분석 단축 / 5년+ React·RN 리딩 / Native Android 모듈 직접 개발'로 변경.",
+      "section": "Hero",
+      "related_sections": [],
+      "priority": "P0",
+      "target_file": "app/content.ts",
+      "acceptance_criteria": [
+        "heroMetrics[0].value가 '80%'이고 label에 'AI 파이프라인' 또는 '분석 시간 단축' 포함",
+        "heroMetrics[1].value가 '5년+' 이고 label에 'React' 및 'React Native' 포함",
+        "heroMetrics[2].value가 'Native'이고 label에 'Android' 및 '네이티브 모듈' 포함",
+        "모든 metric의 detail 필드가 비어 있지 않음"
+      ],
+      "dependencies": [],
+      "resume_alignment": "이력서 자동화&구조설계 카드: 'AI 파이프라인 구축으로 분석 시간 80% 단축' / 경력 5년 6개월 / 멀티플랫폼 연동 카드",
+      "needs_clarification": false,
+      "clarification_question": ""
+    },
+    {
+      "id": "REQ-004",
+      "description": "capabilities 배열에 '멀티플랫폼 연동' CapabilityGroup을 추가. React Native와 Android/iOS Native 모듈 직접 개발, 서드파티 한계 독립 해결, NFC/BLE/AR Unity 하드웨어 연동 경험을 items로 구성.",
+      "section": "Capabilities",
+      "related_sections": [],
+      "priority": "P0",
+      "target_file": "app/content.ts",
+      "acceptance_criteria": [
+        "capabilities 배열에 title이 '멀티플랫폼 연동'인 항목이 존재함",
+        "해당 그룹의 items에 'Android Native 모듈', 'NFC', 'BLE', 'AR' 중 2개 이상 키워드가 포함됨",
+        "description이 한 문장 이상으로 역량을 구체적으로 설명함",
+        "기존 4개 CapabilityGroup이 유지됨"
+      ],
+      "dependencies": [],
+      "resume_alignment": "이력서 멀티플랫폼 연동 카드: 'React Native와 Android Native 브릿지를 직접 개발. iOS/AOS 환경별 호환성 이슈를 독립적으로 해결한 경험.'",
+      "needs_clarification": false,
+      "clarification_question": ""
+    },
+    {
+      "id": "REQ-005",
+      "description": "SkillGroup 타입을 content.ts에 추가하고, PortfolioContent에 skills 필드를 추가. 이력서 스킬 섹션 기준으로 핵심/스타일/상태관리/백엔드/인프라/기타 6개 카테고리 데이터를 작성. page.tsx에 Skills 섹션 렌더링 블록을 timeline 아래, philosophy 위에 추가.",
+      "section": "Skills",
+      "related_sections": ["Layout"],
+      "priority": "P1",
+      "target_file": "app/content.ts",
+      "acceptance_criteria": [
+        "SkillGroup 타입이 { category: string; items: string[] } 형태로 export됨",
+        "PortfolioContent에 skills: SkillGroup[] 필드가 추가됨",
+        "skills 데이터가 핵심(TypeScript, React, React Native, Next.js) 포함 6개 카테고리로 구성됨",
+        "page.tsx에 #skills id를 가진 섹션이 timeline 뒤에 렌더링됨",
+        "navLinks에 '스킬' 항목이 추가되거나, 기존 네비게이션과 일관성이 유지됨"
+      ],
+      "dependencies": [],
+      "resume_alignment": "이력서 스킬 섹션: 핵심 TypeScript·React·React Native·Next.js / 스타일 TailwindCSS·ShadCN·StyledComponent / 상태관리 Zustand·ContextAPI / 백엔드 NestJS·Node.js·GraphQL·PostgreSQL·MySQL / 인프라 AWS·GitHub Actions·FastLane·SST / 기타 VueJS·Java·JSP",
+      "needs_clarification": false,
+      "clarification_question": ""
+    },
+    {
+      "id": "REQ-006",
+      "description": "SubProject 타입을 추가하고 TimelineItem에 subProjects?: SubProject[] 옵셔널 필드를 추가. 슬로그업 timeline 항목에 마인드아너스/SMTOWN/리뷰핀치/썬데이 4개의 subProjects를 추가. page.tsx에서 subProjects가 있을 때 TimelineItem 카드 하단에 배지 목록으로 렌더링.",
+      "section": "Timeline",
+      "related_sections": ["Layout"],
+      "priority": "P1",
+      "target_file": "app/content.ts",
+      "acceptance_criteria": [
+        "SubProject 타입이 { name: string; period: string; oneLineSummary: string } 형태로 export됨",
+        "TimelineItem에 subProjects?: SubProject[] 필드가 추가됨",
+        "슬로그업 항목의 subProjects 배열에 마인드아너스, SMTOWN, 리뷰핀치, 썬데이 4개 항목이 포함됨",
+        "page.tsx에서 subProjects 존재 시 카드 하단에 배지/목록 형태로 렌더링됨",
+        "subProjects가 없는 timeline 항목(새솔소프트, 전환구간)에 렌더링 오류가 없음"
+      ],
+      "dependencies": [],
+      "resume_alignment": "이력서 슬로그업 하위 프로젝트: 마인드아너스(2025.03–2025.07), SMTOWN(2025.01–진행 중), 리뷰핀치(2024.10–2025.03), 썬데이(2024.12–2025.01)",
+      "needs_clarification": false,
+      "clarification_question": ""
+    },
+    {
+      "id": "REQ-007",
+      "description": "EducationItem, CertificationItem 타입을 추가하고 PortfolioContent에 education, certifications 필드를 추가. 이력서 기준 학력 1개(한국방송통신대학교), 자격증/교육 3개(웹디자인기능사, UI/UX 교육 수료, SK AX AI 교육 수료)를 데이터로 작성. page.tsx에 렌더링 위치 결정 및 추가.",
+      "section": "Education",
+      "related_sections": ["Certifications", "Layout"],
+      "priority": "P2",
+      "target_file": "app/content.ts",
+      "acceptance_criteria": [
+        "EducationItem 타입이 { name: string; major?: string; period: string; status?: string } 형태로 export됨",
+        "CertificationItem 타입이 { name: string; period?: string } 형태로 export됨",
+        "education 배열에 한국방송통신대학교 컴퓨터과학과 항목이 포함됨",
+        "certifications 배열에 웹디자인기능사, 스마트디지털 UI/UX 교육, SK AX AI 교육 3개 항목이 포함됨",
+        "page.tsx에 education/certifications 데이터가 렌더링됨 (contact 또는 timeline 하단 인접 위치)"
+      ],
+      "dependencies": ["REQ-005", "REQ-006"],
+      "resume_alignment": "이력서 학력: 한국방송통신대학교 컴퓨터과학과 (2022.03 – 재학/휴학) / 자격증·교육: 웹디자인기능사, 스마트디지털 UI/UX 앱&웹디자인 교육 수료(2020.02–2020.07), SK AX 상생 아카데미 AI 관련 교육 수료(2026.03–2026.04)",
+      "needs_clarification": false,
+      "clarification_question": ""
+    },
+    {
+      "id": "REQ-008",
+      "description": "pnpm run build로 TypeScript 컴파일 에러 없이 빌드 통과 확인. 새로 추가된 타입(SkillGroup, SubProject, EducationItem, CertificationItem)과 PortfolioContent 필드 확장에 대한 정합성 검증.",
+      "section": "Layout",
+      "related_sections": [],
+      "priority": "P3",
+      "target_file": "app/content.ts",
+      "acceptance_criteria": [
+        "pnpm run build 명령이 에러 없이 완료됨",
+        "TypeScript 타입 오류가 0건임",
+        "missing import, undefined 접근 오류가 없음"
+      ],
+      "dependencies": ["REQ-001", "REQ-002", "REQ-003", "REQ-004", "REQ-005", "REQ-006", "REQ-007"],
+      "resume_alignment": "해당 없음",
+      "needs_clarification": false,
+      "clarification_question": ""
+    },
+    {
+      "id": "REQ-009",
+      "description": "개발 서버(pnpm run dev)에서 Hero 새 헤드라인·metrics, Projects 3개 카드, Capabilities 멀티플랫폼 그룹, Skills 섹션, Timeline subProjects 배지, Education/Certifications 블록이 정상 렌더링되는지 시각적 검증. 모바일 375px 뷰포트에서 레이아웃 깨짐 없음 확인.",
+      "section": "Layout",
+      "related_sections": ["Hero", "Projects", "Capabilities", "Skills", "Timeline", "Education", "Certifications"],
+      "priority": "P3",
+      "target_file": "app/page.tsx",
+      "acceptance_criteria": [
+        "Hero 섹션에 새 헤드라인 '주어진 도구로 안 되면 직접 만들고...' 표시됨",
+        "Projects 섹션에 마인드아너스/SMTOWN/리뷰핀치 카드 3개 표시됨",
+        "Capabilities 섹션에 멀티플랫폼 연동 그룹 표시됨",
+        "Skills 섹션에 카테고리별 배지 목록 표시됨",
+        "Timeline 슬로그업 카드 하단에 subProjects 배지 표시됨",
+        "모바일(375px) 뷰포트에서 프로젝트 카드·타임라인 레이아웃 깨짐 없음"
+      ],
+      "dependencies": ["REQ-008"],
+      "resume_alignment": "해당 없음",
+      "needs_clarification": false,
+      "clarification_question": ""
+    }
+  ],
+  "out_of_scope": [
+    "이력서에 없는 새 경력/성과 창작 (기존 이력서 내용만 사용)",
+    "백엔드 API 엔드포인트 추가 (Vercel Hobby 서버리스 환경)",
+    "외부 데이터베이스 연동",
+    "이력서 PDF 뷰어 임베드 기능",
+    "다국어(i18n) 지원",
+    "app/layout.tsx 메타데이터 변경 (우선순위 낮음, 별도 요청 시 진행)",
+    "LinkedIn 링크 활성화 (contact 섹션 주석 처리 상태 — 별도 요청 시 진행)",
+    "썬데이 프로젝트를 featured project로 추가 (이력서상 '그 외 프로젝트' 수준)",
+    "닥터인홈, SK가스 행복1톤을 featured project로 추가 (이력서상 '그 외 프로젝트' 수준)"
+  ],
+  "implementation_order": [
+    "REQ-001",
+    "REQ-002",
+    "REQ-003",
+    "REQ-004",
+    "REQ-005",
+    "REQ-006",
+    "REQ-007",
+    "REQ-008",
+    "REQ-009"
+  ],
+  "dependency_map": {
+    "REQ-007": ["REQ-005", "REQ-006"],
+    "REQ-008": ["REQ-001", "REQ-002", "REQ-003", "REQ-004", "REQ-005", "REQ-006", "REQ-007"],
+    "REQ-009": ["REQ-008"]
+  }
+}

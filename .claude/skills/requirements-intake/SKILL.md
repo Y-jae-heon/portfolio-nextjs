@@ -48,9 +48,11 @@ Agent tool 호출:
       - app/content.ts (현재 포트폴리오 데이터)
 
     출력: requirements-analyzer 에이전트 정의의 JSON 스키마 형식으로 반환
+    산출물 저장: ./ai-work/analysis/YYYY-MM-DD-requirements.json
 ```
 
 에이전트 출력(JSON)을 변수로 보관한다. 출력을 사용자에게 중간에 표시하지 않는다.
+에이전트가 `./ai-work/analysis/`에 JSON 파일을 저장했는지 확인한다.
 
 ---
 

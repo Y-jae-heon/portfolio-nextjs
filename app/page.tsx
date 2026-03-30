@@ -92,7 +92,7 @@ function ProjectCard({
   eyebrow: string;
   name: string;
   summary: string;
-  impact: string;
+  impact?: string;
   stack: string[];
 }) {
   return (
@@ -104,12 +104,14 @@ function ProjectCard({
         {name}
       </h3>
       <p className="mt-3 text-sm leading-7 text-secondary">{summary}</p>
-      <div className="mt-6 rounded-[1.25rem] border border-strong bg-inset-emphasis p-4">
-        <p className="font-mono text-[11px] font-medium text-accent-ink">
-          성과
-        </p>
-        <p className="mt-3 text-sm font-medium leading-7 text-primary">{impact}</p>
-      </div>
+      {impact && (
+        <div className="mt-6 rounded-[1.25rem] border border-strong bg-inset-emphasis p-4">
+          <p className="font-mono text-[11px] font-medium text-accent-ink">
+            성과
+          </p>
+          <p className="mt-3 text-sm font-medium leading-7 text-primary">{impact}</p>
+        </div>
+      )}
       <div className="mt-6 flex flex-wrap gap-2">
         {stack.slice(0, 3).map((item) => (
           <Badge key={item}>{item}</Badge>
@@ -327,17 +329,14 @@ export default function Home() {
                         <Badge key={item}>{item}</Badge>
                       ))}
                     </div>
-                    {project.impact.map((i, idx) => (
-
-                    <div key={`impact-${idx}`} className="mt-8 rounded-[1.5rem] border border-strong bg-inset-emphasis p-5">
+                    <div className="mt-8 rounded-[1.5rem] border border-strong bg-inset-emphasis p-5">
                       <p className="font-mono text-[11px] font-medium text-accent-ink">
-                        핵심 성과 {idx + 1}
+                        핵심 성과
                       </p>
                       <p className="mt-3 text-base font-medium leading-7 text-primary">
-                        {i}
+                        {project.impact[0]}
                       </p>
                     </div>
-                    ))}
                   </div>
 
                   <div className="p-6 sm:p-8">
@@ -442,10 +441,94 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
+                {item.subProjects && item.subProjects.length > 0 && (
+                  <div className="mt-6 rounded-[1.25rem] border border-subtle bg-inset-surface p-5">
+                    <p className="font-mono text-[11px] font-medium text-accent-ink">
+                      주요 프로젝트
+                    </p>
+                    <div className="mt-3 space-y-3">
+                      {item.subProjects.map((sub) => (
+                        <div key={sub.name} className="flex flex-col gap-1 rounded-xl border border-subtle bg-surface p-3 sm:flex-row sm:items-center sm:gap-3">
+                          <div className="flex items-center gap-2">
+                            <Badge>{sub.name}</Badge>
+                            <span className="font-mono text-[11px] text-tertiary">{sub.period}</span>
+                          </div>
+                          <span className="text-sm text-muted">{sub.oneLineSummary}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </article>
             ))}
           </div>
         </Section>
+
+        <Section
+          id="skills"
+          eyebrow="기술 스택"
+          title={"프론트엔드를 중심으로\n서버, AI, 인프라까지 확장해온 기술 스택입니다."}
+          description="각 프로젝트에서 실제로 사용하고 문제를 해결한 기술들을 카테고리별로 정리했습니다."
+          tone="panel"
+        >
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {content.skills.map((group) => (
+              <div key={group.category} className="rounded-[1.25rem] border border-subtle bg-surface-strong p-5">
+                <p className="font-mono text-[11px] font-medium text-accent-ink">
+                  {group.category}
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <Badge key={item}>{item}</Badge>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        {(content.education.length > 0 || content.certifications.length > 0) && (
+          <Section
+            id="education"
+            eyebrow="학력 / 자격"
+            title="지속적으로 학습하고 성장해온 기록입니다."
+            description="실무와 병행하며 컴퓨터과학 학위를 이수 중이고, 관련 자격과 교육을 통해 역량을 확장해왔습니다."
+          >
+            <div className="grid gap-5 md:grid-cols-2">
+              {content.education.length > 0 && (
+                <Card className="p-6">
+                  <p className="font-mono text-[11px] font-medium text-accent-ink">학력</p>
+                  <ul className="mt-4 space-y-3">
+                    {content.education.map((edu) => (
+                      <li key={edu.name} className="flex flex-col gap-1">
+                        <span className="text-base font-semibold text-ink">{edu.name}</span>
+                        {edu.major && <span className="text-sm text-secondary">{edu.major}</span>}
+                        <span className="font-mono text-[11px] text-tertiary">
+                          {edu.period}{edu.status ? ` · ${edu.status}` : ""}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              )}
+              {content.certifications.length > 0 && (
+                <Card className="p-6">
+                  <p className="font-mono text-[11px] font-medium text-accent-ink">자격 / 교육</p>
+                  <ul className="mt-4 space-y-3">
+                    {content.certifications.map((cert) => (
+                      <li key={cert.name} className="flex flex-col gap-1">
+                        <span className="text-sm font-medium text-ink">{cert.name}</span>
+                        {cert.period && (
+                          <span className="font-mono text-[11px] text-tertiary">{cert.period}</span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              )}
+            </div>
+          </Section>
+        )}
 
         <Section
           id="philosophy"
@@ -506,10 +589,10 @@ export default function Home() {
                     rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     target={link.href.startsWith("http") ? "_blank" : undefined}
                   >
-                    <pre className="flex self-stretch items-center gap-2">
-                    <Image src={link.img} width={40} height={40} alt={'github-logo'} />
+                    <div className="flex self-stretch items-center gap-2">
+                    <Image src={link.img} width={40} height={40} alt={`${link.label} logo`} />
                     <p className="text-sm font-semibold text-ink">Go to {link.label}</p>
-                    </pre>
+                    </div>
                     {/* <p className="mt-2 text-sm leading-6 text-muted">{link.note}</p> */}
                   </a>
                 ))}

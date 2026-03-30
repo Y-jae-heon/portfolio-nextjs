@@ -1,0 +1,1 @@
+- [Portfolio QA recurring patterns](./project_qa_patterns.md) — array[0] type gaps, navLink drift, duplicate render risk in content.ts-driven portfolio
