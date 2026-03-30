@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { content } from "./content";
 import Image from "next/image";
+import { Analytics } from '@vercel/analytics/next';
 
 type SectionProps = {
   id: string;
@@ -148,6 +149,7 @@ function DetailBlock({
 
 export default function Home() {
   return (
+    <>
     <div className="min-h-screen bg-page text-ink">
       <header className="sticky top-0 z-40 border-b border-subtle bg-header backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
@@ -614,5 +616,7 @@ export default function Home() {
         </div>
       </footer>
     </div>
+    <Analytics />
+    </>
   );
 }
